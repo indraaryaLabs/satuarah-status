@@ -249,7 +249,11 @@ function panel(
             t.panel.chartScale(formatMs(chartMax(service.samples), t.locale)),
           ),
         )
-      : h('p', { class: 'chart-note' }, t.panel.noSamples),
+      : h(
+          'p',
+          { class: 'chart-note' },
+          service.samples.length === 1 ? t.panel.fewSamples : t.panel.noSamples,
+        ),
     stats(service, t),
     service.level !== 'up' && service.error
       ? h('p', { class: 'problem' }, h('strong', null, `${t.panel.lastError}: `), service.error)

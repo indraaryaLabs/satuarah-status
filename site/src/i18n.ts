@@ -49,6 +49,7 @@ export interface Strings {
     hoursAgo: string;
     now: string;
     noSamples: string;
+    fewSamples: string;
     uptime: string;
     last24h: string;
     last7d: string;
@@ -145,6 +146,7 @@ export const strings: Record<Lang, Strings> = {
       hoursAgo: '24 hours ago',
       now: 'Now',
       noSamples: 'No checks in the last 24 hours.',
+      fewSamples: 'Only one check so far. The chart appears once there are more.',
       uptime: 'Availability',
       last24h: 'Last 24 hours',
       last7d: 'Last 7 days',
@@ -253,6 +255,7 @@ export const strings: Record<Lang, Strings> = {
       hoursAgo: '24 jam lalu',
       now: 'Sekarang',
       noSamples: 'Belum ada pemeriksaan dalam 24 jam terakhir.',
+      fewSamples: 'Baru satu pemeriksaan. Grafik muncul setelah ada lebih banyak data.',
       uptime: 'Ketersediaan',
       last24h: '24 jam terakhir',
       last7d: '7 hari terakhir',
