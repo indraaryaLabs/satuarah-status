@@ -1,0 +1,99 @@
+{
+  "site": {
+    "title": "SatuArah Status",
+    "repository": "indraaryaLabs/satuarah-status"
+  },
+  "defaults": {
+    "intervalSec": 300,
+    "timeoutMs": 10000,
+    "degradedMs": 2000,
+    "retries": 1,
+    "retryDelayMs": 2000,
+    "failureThreshold": 2
+  },
+  "services": [
+    {
+      "id": "pickframe-web",
+      "translations": {
+        "id": {
+          "name": "Aplikasi web",
+          "description": "Halaman utama, masuk, dan ruang kerja fotografer."
+        }
+      },
+      "group": "PickFrame",
+      "name": "Web app",
+      "description": "Landing page, sign-in and the photographer workspace.",
+      "url": "https://pickframe.satuarah.click/",
+      "href": "https://pickframe.satuarah.click/",
+      "expect": { "status": [200], "bodyIncludes": "id=\"root\"" },
+      "runbook": "docs/runbooks/pickframe-web.md"
+    },
+    {
+      "id": "pickframe-api",
+      "translations": {
+        "id": {
+          "name": "API",
+          "description": "API terotentikasi di balik ruang kerja dan tautan klien."
+        }
+      },
+      "group": "PickFrame",
+      "name": "API",
+      "description": "Authenticated API behind the workspace and client links.",
+      "url": "https://api-pickframe.satuarah.click/",
+      "expect": { "status": [200], "bodyIncludes": "\"status\":\"ok\"" },
+      "degradedMs": 3000,
+      "runbook": "docs/runbooks/pickframe-api.md"
+    },
+    {
+      "id": "pickframe-data",
+      "translations": {
+        "id": {
+          "name": "Jalur database",
+          "description": "Pencarian tautan klien publik yang harus menjangkau database untuk menjawab."
+        }
+      },
+      "group": "PickFrame",
+      "name": "Database path",
+      "description": "A public client-link lookup, which must reach the database to answer.",
+      "url": "https://api-pickframe.satuarah.click/api/p/status-probe-unknown-link",
+      "expect": { "status": [404], "bodyIncludes": "not found" },
+      "intervalSec": 900,
+      "degradedMs": 4000,
+      "runbook": "docs/runbooks/pickframe-database.md"
+    },
+    {
+      "id": "pickframe-select",
+      "translations": {
+        "id": {
+          "name": "Aplikasi Select",
+          "description": "Aplikasi pendamping offline-first untuk memilih foto di lokasi."
+        }
+      },
+      "group": "PickFrame",
+      "name": "Select app",
+      "description": "Offline-first companion app for picking photos on location.",
+      "url": "https://select-pickframe.satuarah.click/",
+      "href": "https://select-pickframe.satuarah.click/",
+      "expect": { "status": [200], "bodyIncludes": "PickFrame Select" },
+      "runbook": "docs/runbooks/pickframe-web.md"
+    },
+    {
+      "id": "portfolio",
+      "label": "Portfolio",
+      "translations": {
+        "id": {
+          "name": "Portofolio",
+          "description": "Indra Arya, software engineer.",
+          "label": "Portofolio"
+        }
+      },
+      "group": "Studio",
+      "name": "Portfolio",
+      "description": "Indra Arya, software engineer.",
+      "url": "https://indraarya.satuarah.click/",
+      "href": "https://indraarya.satuarah.click/",
+      "expect": { "status": [200], "bodyIncludes": "Indra Arya" },
+      "runbook": "docs/runbooks/portfolio.md"
+    }
+  ]
+}
